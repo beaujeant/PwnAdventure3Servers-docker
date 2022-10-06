@@ -1,0 +1,36 @@
+version: "3.3"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    environment: 
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - psql_socket:/var/run/postgresql
+      - pwn3_db:/var/lib/postgresql/data
+  master:
+    build: master_docker/
+    image: pwn3_master
+    container_name: pwn3_master
+    hostname: master_docker.pwn3
+    ports:
+      - "3333:3333"
+    volumes:
+      - psql_socket:/var/run/postgresql
+    depends_on: 
+      - postgres
+  game:
+    build: game_docker/
+    image: pwn3_game
+    container_name: pwn3_game
+    ports: 
+      - 3000-3010:3000-3010
+    depends_on:
+      - master
+volumes:
+  psql_socket:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  pwn3_db:
+    driver: local
