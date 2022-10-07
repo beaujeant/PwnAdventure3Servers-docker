@@ -26,9 +26,17 @@ docker-compose build
 docker-compose up -d
 ```
 
+The database is persistent (via the volume `pwn3_db`), so you can stop you docker:
+
+```
+docker-compose down
+```
+
+If you want to start from scratch, you can add the option `--volume`.
+
 ### Setting
 
-By default, the **master server** listens on port **tcp/3333** on the **locahost** interface, and the **game server** (maximum 5 instances) listens from port **tcp/3000** to **tcp/3004** on the **localhost** interface. There is one default admin team you can join with the hash `db1e797da308f027c876c61786682f3b`.
+By default, the **master server** listens on port **tcp/3333** on the **locahost** interface, and the **game server** (maximum 5 instances) listens from port **tcp/3000** to **tcp/3004** on the **localhost** interface (see `game_docker/server.ini`). There is one default admin team you can join with the hash `db1e797da308f027c876c61786682f3b` (see `maser_docker/MasterServer/initdb.sql`).
 
 
 ## Install client
@@ -46,4 +54,4 @@ Hostname=localhost
 Port=3333
 ```
 
-No need to configure the `GameServer` as the master server will advertise the hostname (i.e. localhost) and port (i.e. 3000-3004) to the client.
+No need to configure the `GameServer` as the master server will advertise the hostname (i.e. localhost) and port (i.e. 3000-3004) to the client (see `game_docker/server.ini`).
