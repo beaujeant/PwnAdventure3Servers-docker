@@ -10,7 +10,7 @@ RUN useradd -s /bin/bash pwn3 \
  && mv /tmp/PwnAdventure3Servers/GameServer/PwnAdventure3Server /opt/pwn3/PwnAdventure3/Binaries/Linux/ \
  && chown -R pwn3:pwn3 /opt/pwn3 \
  && rm /opt/pwn3/PwnAdventure3/Binaries/Linux/PwnAdventure3-Linux-Shipping \ 
- && rm /tmp/PwnAdventure3Server.tar.gzl \
+ && rm /tmp/PwnAdventure3Server.tar.gz \
  && rm /tmp/PwnAdventure3_Linux.zip \
  && rm -rf /tmp/PwnAdventure3Servers
 USER pwn3
