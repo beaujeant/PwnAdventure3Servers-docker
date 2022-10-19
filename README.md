@@ -17,7 +17,7 @@ The server has two components: a **master server** responsible for login, creati
 
 ### Install
 
-Simply [download](https://github.com/beaujeant/PwnAdventure3Servers-docker/archive/refs/heads/main.zip), build and run the dockers:
+Simply [download](https://github.com/beaujeant/PwnAdventure3Servers-docker/archive/refs/heads/main.zip), build and run the dockers. It might take a while to build the environment the first time as it will download the game server (around 2Go) and the docker images for _postgres_ and _Ubuntu 14.04_:
 
 ```
 git clone https://github.com/beaujeant/PwnAdventure3Servers-docker.git
@@ -26,15 +26,15 @@ docker-compose build
 docker-compose up -d
 ```
 
-The database is persistent (via the volume `pwn3_db`), so you can stop you docker:
+Once done, you can run the following command to stop the containers:
 
 ```
 docker-compose down
 ```
 
-If you want to start from scratch, you can add the option `--volume`.
+The database is persistent (via the volume `pwn3_db`). If you want to start from scratch, you can add the option `--volume` when putting down the containers.
 
-### Setting
+### Server settings
 
 By default, the **master server** listens on port **tcp/3333** on the **locahost** interface, and the **game server** (maximum 5 instances) listens from port **tcp/3000** to **tcp/3004** on the **localhost** interface (see `game_docker/server.ini`). There is one default admin team you can join with the hash `db1e797da308f027c876c61786682f3b` (see `maser_docker/MasterServer/initdb.sql`).
 
