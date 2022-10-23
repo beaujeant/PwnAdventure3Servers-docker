@@ -38,6 +38,14 @@ The database is persistent (via the volume `pwn3_db`). If you want to start from
 
 By default, the **master server** listens on port **tcp/3333** on the **locahost** interface, and the **game server** (maximum 5 instances) listens from port **tcp/3000** to **tcp/3004** on the **localhost** interface (see `game_docker/server.ini`). There is one default admin team you can join with the hash `db1e797da308f027c876c61786682f3b` (see `maser_docker/MasterServer/initdb.sql`).
 
+In case you want to run the server on a different host than your client, you will have to change the advertised hostname of the game server and update you client `hosts` file accordingly:
+
+* Modify `game_server/server.ini` and change `Hostname=localhost` (line 6) with `Hostname=game.pwn3` and rebuild the image using `docker-compose build`
+* On you client, [change your `hosts` file](https://www.hostinger.com/tutorials/how-to-edit-hosts-file) to point `game.pwn3` to your server
+
+### Manual install
+
+If you prefer to install the server directly on your computer, you can follow my [guide](https://github.com/beaujeant/PwnAdventure3/blob/master/INSTALL-server.md) on GitHub.
 
 ## Install client
 

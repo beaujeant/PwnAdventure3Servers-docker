@@ -9,7 +9,7 @@ services:
       - psql_socket:/var/run/postgresql
       - pwn3_db:/var/lib/postgresql/data
   master:
-    build: master_docker/
+    build: ./master_docker
     image: pwn3_master
     container_name: pwn3_master
     hostname: master_docker.pwn3
@@ -20,7 +20,7 @@ services:
     depends_on: 
       - postgres
   game:
-    build: game_docker/
+    build: ./game_docker
     image: pwn3_game
     container_name: pwn3_game
     ports: 
