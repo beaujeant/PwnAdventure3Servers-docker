@@ -3,8 +3,8 @@ EXPOSE 3000-3010
 RUN useradd -s /bin/bash pwn3 \
  && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget \
  && rm -rf /var/lib/apt/lists/* \
- && wget https://pwnadventure.com/PwnAdventure3Server.tar.gz -O /tmp/servers.tar.gz \
- && wget https://pwnadventure.com/PwnAdventure3_Linux.zip -O /tmp/client.zip \
+ && wget https://pwnadventure.com/PwnAdventure3Server.tar.gz --no-check-certificate -O /tmp/servers.tar.gz \
+ && wget https://pwnadventure.com/PwnAdventure3_Linux.zip --no-check-certificate -O /tmp/client.zip \
  && tar xf /tmp/servers.tar.gz -C /tmp/ \
  && unzip /tmp/client.zip -d /opt/ \
  && mv /opt/PwnAdventure3 /opt/pwn3 \
