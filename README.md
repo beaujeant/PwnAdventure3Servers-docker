@@ -77,6 +77,14 @@ Download the game:
 - [Windows](https://pwnadventure.com/PwnAdventure3_Windows.zip)  
 - [Linux](https://pwnadventure.com/PwnAdventure3_Linux.zip)  
 
+Make sure to run the executable directly in the folder, otherwise the binary might have some issue to find the certificate.
+
+```
+cd PwnAdventure3/Binaries/Linux
+./PwnAdventure3-Linux-Shipping
+```
+
+
 ## 🌐 Fix Hostnames
 
 Add this to your **hosts file**:
