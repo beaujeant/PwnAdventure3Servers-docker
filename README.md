@@ -77,28 +77,12 @@ Download the game:
 - [Windows](https://pwnadventure.com/PwnAdventure3_Windows.zip)  
 - [Linux](https://pwnadventure.com/PwnAdventure3_Linux.zip)  
 
-Edit this file:
-
-```
-PwnAdventure3/PwnAdventure3/Content/Server/server.ini
-```
-
-Set:
-
-```ini
-[MasterServer]
-Hostname=master.pwn3
-Port=3333
-```
-
----
-
 ## 🌐 Fix Hostnames
 
 Add this to your **hosts file**:
 
 ```
-127.0.0.1 pwn3.hackeduniverse.com
+127.0.0.1 pwn3.hackeduniverse.com game.pwn3.hackeduniverse.com
 ```
 
 👉 This makes your computer recognize the local servers.
