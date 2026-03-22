@@ -15,7 +15,5 @@ RUN useradd -s /bin/bash pwn3 \
  && rm /tmp/client.zip \
  && rm -rf /tmp/PwnAdventure3Servers
 USER pwn3
-COPY server.ini /opt/pwn3/PwnAdventure3/Content/Server/
-COPY server.crt /opt/pwn3/PwnAdventure3/Content/Server/
 WORKDIR /opt/pwn3/PwnAdventure3/Binaries/Linux/
 ENTRYPOINT /opt/pwn3/PwnAdventure3/Binaries/Linux/PwnAdventure3Server
