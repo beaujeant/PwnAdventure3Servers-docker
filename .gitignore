@@ -1,0 +1,26 @@
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+
+
+# -------------------------
+# Docker overrides & local config
+# -------------------------
+docker-compose.override.yml
+docker-compose.local.yml
+
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# IDE / Editor
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo

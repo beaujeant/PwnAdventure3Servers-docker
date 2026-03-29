@@ -13,15 +13,17 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks:
+      - pwn3_net
 
   master:
     container_name: pwn3_master
     build:
       context: ./master
     image: pwn3_master
-    hostname: pwn3.hackeduniverse.com
+    hostname: master.pwn3
     ports:
-      - "3333:3333"
+      - "${MASTER_HOST_PORT:-3333}:3333"
     volumes:
       - psql_socket:/var/run/postgresql
       - ./master/MasterServer:/opt/pwn3
@@ -29,15 +31,19 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    networks:
+      pwn3_net:
+        aliases:
+          - master.pwn3
 
   game:
     container_name: pwn3_game
     build:
       context: ./game
     image: pwn3_game
-    hostname: game.pwn3.hackeduniverse.com
+    hostname: game.pwn3
     ports:
-      - "3000-3010:3000-3010"
+      - "${GAME_HOST_PORTS:-3000-3010}:3000-3010"
     volumes:
       - ./game/server.ini:/opt/pwn3/PwnAdventure3/Content/Server/server.ini
       - ./game/server.crt:/opt/pwn3/PwnAdventure3/Content/Server/server.crt
@@ -45,6 +51,13 @@ services:
       master:
         condition: service_started
     restart: unless-stopped
+    networks:
+      pwn3_net:
+        aliases:
+          - game.pwn3
+
+networks:
+  pwn3_net:
 
 volumes:
   psql_socket:

@@ -70,12 +70,30 @@ db1e797da308f027c876c61786682f3b
 
 ---
 
+## 🔌 Proxy Setup
+
+Since PwnAdventure3 is designed for learning reverse engineering and network protocol analysis, you may want to intercept traffic between the client and the servers using a proxy.
+
+A `.env.proxy` file is provided to easily offset the Docker host ports, freeing the original ports for your proxy:
+
+```bash
+cp .env.proxy .env
+docker compose up -d
+```
+
+This maps the Docker containers to ports `13333` (master) and `13000-13010` (game), leaving ports `3333` and `3000-3010` available for your proxy. Your proxy then listens on the original ports and forwards traffic to the offset Docker ports.
+
+- **Master server** (login/auth): client ↔ proxy on `tcp/3333` ↔ Docker on `tcp/13333`
+- **Game server** (game instances): client ↔ proxy on `tcp/3000-3010` ↔ Docker on `tcp/13000-13010`
+
+---
+
 ## 🎮 Client Setup
 
 Download the game:
 
-- [Windows](https://pwnadventure.com/PwnAdventure3_Windows.zip)  
-- [Linux](https://pwnadventure.com/PwnAdventure3_Linux.zip)  
+- [Windows](https://pwnadventure.com/PwnAdventure3_Windows.zip)
+- [Linux](https://pwnadventure.com/PwnAdventure3_Linux.zip)
 
 Make sure to run the executable directly in the folder, otherwise the binary might have some issue to find the certificate.
 
@@ -84,16 +102,29 @@ cd PwnAdventure3/Binaries/Linux
 ./PwnAdventure3-Linux-Shipping
 ```
 
+### Configure the client
 
-## 🌐 Fix Hostnames
+Edit the client's `server.ini` file (located at `PwnAdventure3/Content/Server/server.ini`) and set the master server hostname:
 
-Add this to your **hosts file**:
+```ini
+[MasterServer]
+Hostname=master.pwn3
+Port=3333
+```
+
+That's all you need to configure. The game server address (`game.pwn3`) is automatically advertised by the game server to the master server, which forwards it to your client upon login.
+
+---
+
+## 🌐 Hostnames
+
+Add this to your **hosts file** (`/etc/hosts` on Linux, `C:\Windows\System32\drivers\etc\hosts` on Windows):
 
 ```
-127.0.0.1 pwn3.hackeduniverse.com game.pwn3.hackeduniverse.com
+127.0.0.1 master.pwn3 game.pwn3
 ```
 
-👉 This makes your computer recognize the local servers.
+This makes your computer resolve the server hostnames to your local machine, where Docker (or your proxy) is listening.
 
 ---
 
